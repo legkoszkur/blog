@@ -1,0 +1,139 @@
+
+{% extends 'base.html' %}
+{% block title %}{{object.title}}{% endblock %}
+{% block content %}
+
+
+
+
+        <div class="container">
+          <div class="row flex-lg-nowrap">
+          
+            <div class="col">
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="e-profile">
+                        <div class="row">
+                          <div class="col-12 col-sm-auto mb-3">
+                            <div class="mx-auto" style="width: 140px;">
+                              <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                                  <img src="{{ current_user.profile_picture.url }}" alt="Admin" class="p-2" width="150">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                            <div class="text-left text-sm-left mb-2 mb-sm-0">
+          
+                              <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{current_user.nickname}}</h4>
+
+                              <div class="form-group">
+                                <p class="text-secondary">{{current_user.job}}</p>
+                              </div>
+                            </div>
+                            <div class="text-center text-sm-right">
+                              <div class="text-muted"><small>Dołączył: {{current_user.date_joined.date}}</small></div>
+                            </div>
+                          </div>
+                        </div>
+                        <ul class="nav nav-tabs">
+                          <li class="nav-item"><a class="active nav-link">Personalne</a></li>
+                        </ul>
+                        <div class="tab-content pt-3">
+                          <div class="tab-pane active">
+                            <form class="form" novalidate="">
+                              <div class="row">
+                                <div class="col mb-2">
+                                  <div class="form-group">
+                                    <div class="card mt-2">
+                                      <div class="m-3 flex-wrap">
+                                          <h6><strong>O mnie</strong></h6>
+                                          <p>{{ current_user.biogram }}</p>
+                                      </div>  
+                                  </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col">
+                                  <div class="row mb-2">
+                                    <div class="col ">
+                                      <div class="form-group border border-1 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                          <h6><div class="fa fa-globe fa-2x text-dark"></div>&nbsp;Strona własna</h6>
+                                          {% if current_user.own_website_url != "#" %}
+                                              <a href="{{ current_user.own_website_url }}" style="text-decoration: none;"><span class="text-secondary">Zobacz</span></a>
+                                          {% else %}
+                                              <span class="text-secondary">Nie podano</span>
+                                          {% endif %}
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="form-group border border-1 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                        <h6><div class="fa fa-linkedin fa-2x text-dark"></div>&nbsp;Linkedin</h6>
+
+                                        {% if current_user.linkedin_url != "#" %}
+                                            <a href="{{ current_user.linkedin_url }}" style="text-decoration: none;"><span class="text-secondary">Zobacz</span></a>
+                                        {% else %}
+                                            <span class="text-secondary">Nie podano</span>
+                                        {% endif %}     
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col">
+                                  
+                                    <div class="row">
+                                      <div class="col">
+                                        <div class="form-group border border-1 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                          <h6><div class="fa fa-github fa-2x text-dark"></div>&nbsp;Github</h6>
+                                          {% if current_user.github_url != "#" %}
+                                              <a href="{{ current_user.github_url }}" style="text-decoration: none;"><span class="text-secondary">Zobacz</span></a>
+                                          {% else %}
+                                              <span class="text-secondary">Nie podano</span>
+                                          {% endif %}
+                                          
+                                      </div>
+                                      </div>
+                                       <div class="col">
+                                         <div class="form-group border border-1 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                          <h6><div class="fa fa-facebook fa-2x text-dark"></div>&nbsp;Facebook</h6>
+                                          {% if current_user.facebook_url != "#" %}
+                                              <a href="{{ current_user.facebook_url }}" style="text-decoration: none;"><span class="text-secondary">Zobacz</span></a>
+                                          {% else %}
+                                              <span class="text-secondary">Nie podano</span>
+                                          {% endif %}
+                                      </div>
+                                      </div>
+                                    </div>
+                                    
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          
+          </div>
+          
+
+
+{% endblock content%}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Wyslij newsletter {% endblock %}
+{% block content %}
+    <div>
+        {% if user.is_authenticated %}
+            <div>
+                <h1>Wyślij newslatter:</h1>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+                    <button class="btn btn-dark">Wyślij</button>
+                </form>
+            </div>  
+            </br>
+            <div class="p-3 mb-2 bg-danger text-white">(Test mail) - oznacza, że wiadomość zostanie wysłana tylko do ciebie,
+                jeżeli nie zaznaczysz tej pocji wiadomość zostanie wysłana do wszystkich</div>
+           
+        {% else %}
+            <div>
+                <h1>Ups nie ma takiej strony :/</h1>
+            </div>
+        {% endif %}
+
+        </br></br></br></br>
+    </div>   
+{% endblock %}
+                

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Change email {% endblock %}
+
+{% block content %}
+
+<h1>Zmień email</h1>
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.email}}
+    {% if error %}
+        <p class="text-danger">{{error}}</p>
+    {% endif %}
+    <button class="btn btn-dark">Zmień</button>
+   
+
+
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Zgłoś komentarz {% endblock %}
+{% block content %}
+    <div>
+        {% if user.is_authenticated %}
+            <div>
+                <h1>Zgłoś komentarz:</h1>
+                </br>
+                    <div class="form-group" >  
+                        <table>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form.report_body}}
+                        </table>
+                        </br>
+                        <button class="btn btn-dark">Zgłoś</button>
+                        </form>
+                 
+                    </div>
+            </div>        
+            </br></br></br></br></br></br></br></br>
+        {% else %}
+            <div>
+                <h1>Ups nie ma takiej strony :/</h1>
+            </div>
+        {% endif%}
+    </div>
+{% endblock %}
+                

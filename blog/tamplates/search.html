@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Wyszukiwarka {% endblock %}
+{% block content %}
+    <div>
+        {% if search_request %}
+            {% if search_results %}
+                <h1> Rezultaty wyszukiwania dla: "{{search_request}}" </h1>
+                <ul>
+                    {% for result in search_results %}
+                        <li><a href= "{% url 'article-view' result.text_to_url %}">{{result.title}}</a></li>
+                    </br>
+                    {% endfor %}
+                </ul> 
+            {% else %}
+                <h1> Brak resultatów wyszukań dla: "{{search_request}}" </h1>
+            {% endif %}  
+        <!--W przyadku gdy uzytkownik nie wprowadzi żadnej frazy do wyszukiwarki-->
+        {% else %}
+            <h1> Żadne zapytanie nie zostało wprowadzone. </h1>
+        {% endif %}
+    </div>
+{% endblock %}

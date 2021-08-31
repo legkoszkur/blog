@@ -1,0 +1,29 @@
+<!-- ten html wyglada praktycznie identycznie dla tego że to jakby będzie zaciągać spowrotem dane do updatu-->
+{% extends 'base.html' %}
+{% block title %} Usuń kategorię {% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Usuń kategorię:</h1>
+        <br>
+
+        <div class="form-group">  
+            <form method="POST">
+            <strong>Jesteś pewny że chcesz usunąć kategorię: "{{category.name}}"  ? </strong>
+            <br>
+            <br>
+            <!--potrzebujemy tokena ale nie potrzebujemy formy-->
+            {% csrf_token %}
+            <button type="submit" class="btn btn-dark">Usuń kategorię!</button>
+
+            </form>
+        </div>
+   
+        <br>
+
+    {% else %}
+        <h1>Ups nie ma takiej strony :/</h1>
+
+    {% endif%}
+
+{% endblock %}
+                

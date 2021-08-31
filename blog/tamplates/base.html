@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+{% load static %}  
+<html>
+
+    <head>
+        <title>
+          {% block title %}
+          Witaj na moim blogu.
+          {% endblock %}
+        </title>
+
+        <meta charset="utf-8">
+        <!-- Kafelki social media -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!--tym kodem lączę swoje style z tym plikiem html-->
+        <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+      
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script src="{% static '/js/scripts.js' %}"></script>
+
+    </head>
+    <body>
+      <!--Navigation bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+            <!--clasa odpowiada za to że oprócz zwęzania responsywności fluid zapewnia rozszezalność o ponad 100%-->
+            <div class="container">
+             <!--to jest moje logo jako button-->
+              <a class="navbar-brand" href="{% url 'home'%}">{LegDev}</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+        <!--buttons-->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Blog</a>
+                  </li>
+                  <!--To dziła tylko gdt widok ma widok ma możliwość pobierania danych z innego modelu 
+                  bo np model listview ma taką opcję a np editview nie ma i dla tego w nim to nie działa-->                    
+                  {% if existing_categories%}
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle active" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Kategorie
+                      </a>
+                      <!-- Category menu code -->
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for item in existing_categories %}
+                          <li><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                   
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{% url 'categories' %}">Kategorie</a>
+                    </li>
+                  {% endif%}
+
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">O mnie</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'contact_details'%}">Kontakt</a>
+                  </li>
+
+
+                  {% if user.is_authenticated %}
+                    <!-- Category menu code -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Profil  ({{user.nickname}})
+                    </a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      
+                      {% if user.is_staff %}
+                      <li class="nav-item btn-light"><a class="dropdown-item" href="{% url 'add-post' %}">Dodaj post</a></li>
+                      {% endif %}
+                      
+                      {% if user.is_superuser %}
+                      <li class="nav-item btn-light"><a class="dropdown-item" href="{% url 'add-category' %}">Dodaj kategorię</a></li>
+                      <li class="nav-item btn-light"><a class="dropdown-item" href="{% url 'send-newsletter' %}">Wyślij newsletter</a></li>
+                      {% endif %}
+                      <li class="nav-item btn-light"><a class="dropdown-item" href="{% url 'profile' user.nickname %}">Profil</a></li>
+                      <li class="nav-item btn-light"><a class="dropdown-item" href="{% url 'edit-profile' %}">Edytuj profil</a></li>
+                      {% if user.is_superuser %}
+                      <li class="nav-item btn-success"><a class="dropdown-item" href="{% url 'panel-administracyjny' %}">Panel administracyjny</a></li>
+                      {% endif %}
+                      <li class="nav-item btn-warning"><a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a></li>
+                      
+                    </ul>
+
+                  </li>
+                  {% else %} 
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'login'%}">Zaloguj</a>
+                  </li> 
+                  {% endif %}
+                </ul>
+        <!--social media-->
+                <ul class="mb-1">
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="fa fa-linkedin fa-2x text-white"></div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="fa fa-instagram fa-2x text-white"></div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="fa fa-youtube fa-2x text-white"></div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="fa fa-twitter fa-2x text-white"></div>
+                    </div>
+                    <div class="col-sm"></div>
+                  </div>    
+                </ul>
+        <!--search form-->
+                <div>
+                  <form class="d-flex" action="{% url 'search' %}" method="GET">
+                    <input class="form-control me-2" name="query" required placeholder="Wyszukaj na stronie" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Wyszukaj</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </nav>
+
+      <!--Blog section-->
+        <section>
+            <!--robie kontener zeby były marginesy na bokach-->
+        <div class="container">
+            <!--robie raw  żeby podzielić sekcje bloga na artykuły i pasek obok (aside) jakies dodatki itp-->
+            <div class="row">
+
+                <!--miejsce na artykuły pakuję w col-sm-8 żeby dzielił od takiej wielkości 
+                    na koleumny wcinał (ale to trzeba zobaczyc jeszcze) -->
+                <div class="col-lg-9">
+                    <div class="container">
+                        <article>
+                          {% block content %}
+                               
+
+
+                          {% endblock %}
+                        </article>
+                    </div>              
+                </div>          
+                <aside class="col-lg-3">
+                  {% block aside %}
+                               
+
+
+                  {% endblock aside %}
+
+
+                  <!--top list tylko dla home view-->
+                  {% url 'home' as home_view %}
+                  {% if request.path == home_view %}
+                    {% include 'newsletter_aside.html' %} 
+                    {% include 'aside_top_list.html' %}
+                  {% endif %}
+                
+                  <!--tym wykluczam widok z logowania-->
+                
+                  {% url 'login' as login_view %}
+                  {% url 'register' as register_view %}
+                  {% url 'edit-profile' as edit_profile %}
+                  {% url 'change-password' as change_password %}
+                  {% url 'add-post' as add_post %}
+                  {% url 'add-category' as add_category %}
+                  {% url 'send-newsletter' as send_newsletter %}
+                  {% url 'change-nickname' as change_nickname %}
+                  {% url 'change-email' as change_email %}
+                  {% url 'delete-account' as delete_account %}
+
+
+
+                  {% if request.path == login_view %}
+                  <div></div>
+                  {% elif request.path == register_view %}
+                  <div></div>  
+                  {% elif request.path == edit_profile %}
+                  <div></div>
+                  {% elif request.path == change_password %}
+                  <div></div>
+                  {% elif request.path == add_post %}
+                  <div></div>
+                  {% elif request.path == add_category %}
+                  <div></div>
+                  {% elif request.path == send_newsletter %} 
+                  <div></div>
+                  {% elif request.path == change_nickname %} 
+                  <div></div> 
+                  {% elif request.path ==  change_email %} 
+                  <div></div>
+                  {% elif request.path ==  delete_account %} 
+                  <div></div>    
+                    
+                  {% else %}
+                    {% include 'contact_aside.html' %} 
+                    {% include 'aside_social_media.html' %}
+                  {% endif %}
+
+                  <!--tu zrób zeby dla register nie pokazywało aside-->
+                </aside>
+            </div>
+        </div>
+        </section>
+        <div id="pagination" class="mt-3">
+          {% block pagination%}
+
+          {% endblock pagination%}
+        </div>
+
+      <!--Footer-->
+        <div class="card-footer text-muted text-center">
+            Aleksander Legkoszkur © 2021. Wszelkie prawa zastrzeżone.
+        </div>
+
+  </body>
+</html>

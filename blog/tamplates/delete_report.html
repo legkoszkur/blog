@@ -1,0 +1,36 @@
+<!-- ten html wyglada praktycznie identycznie dla tego że to jakby będzie zaciągać spowrotem dane do updatu-->
+{% extends 'base.html' %}
+{% block title %} Usuń zgłoszenie {% endblock %}
+{% block content %}
+    {% if user.is_superuser %}
+        <h1>Usuń zgłoszenie:</h1>
+        <br>
+
+        <div class="form-group">  
+            <form method="POST">
+            <strong>Jesteś pewny że chcesz usunąć zgłoszenie? </strong>
+            <p>"{{object.report_body}}"</p>
+
+            <br>
+            <br>
+            <!--potrzebujemy tokena ale nie potrzebujemy formy-->
+            {% csrf_token %}
+            <button class="btn btn-dark">Usuń zgłoszenie!</button>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    {% else %}
+        <h1>Ups nie ma takiej strony :/</h1>
+
+    {% endif%}
+
+{% endblock %}
+                

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div>
+        {% if user.is_superuser %}
+                <div>
+                    <h1>Dodaj kategorię</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <button class="btn btn-dark">Dodaj</button>
+                    </form>
+                </div>    
+        {% else %}
+            <div>
+                <h1>Nie masz uprawnień dostępu do tej strony.</h1>
+            </div>
+        {% endif %}  
+        </br></br></br></br>
+    </div>
+{% endblock %}
+                

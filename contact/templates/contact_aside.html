@@ -1,0 +1,44 @@
+<form onsubmit="return submitUserForm();" method="POST" action='{% url 'contact_info' %}'>
+  {% csrf_token %}
+    <div class="mt-2">
+      <h3>Formularz kontaktowy</h3>
+    </div>
+
+    <div class="mb-3">
+      <label for="cname" class="form-label">Imię</label>
+      <input type="text" class="form-control" id="cname" placeholder="Maciej" name="cname" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="cemeil" class="form-label">Adress emeil</label>
+      <input type="email" class="form-control" id="cemeil" placeholder="nazwa@przyklad.com" name="cemeil" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="cmessage" class="form-label">Treść wiadomości</label>
+      <textarea class="form-control" style="resize: initial;height: 7cm; " id="cmessage" rows="3" maxlength="1000" name="cmessage" required></textarea>
+    </div>
+
+    <!--Capchata-->
+    <div id="captcha" style="display: none">
+      <div class="g-recaptcha" data-sitekey="6LeLJosaAAAAABcj9iDIJZ_oLNDB5kiyVQQLyXLh" data-callback="verifyCaptcha"></div>
+      <div id="g-recaptcha-error"></div>
+      </div>
+    </br>
+    <!--Koniec capchata--> 
+
+    <div class="mb-1 text-center">
+      <button type="submit" class="btn btn-dark">Wyślij</button>
+    </div> 
+    
+</form>
+
+
+<hr class="my-4">
+
+
+
+
+
+
+                          

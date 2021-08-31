@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Informacja {% endblock %}
+
+{% block content %}                             
+<div class="alert alert-primary" role="alert">
+  <p>Aby dokończyć proces zapisu wejdź na swoją skrzynkę i potwierdź adres emeil.</p>
+</div>
+</br>
+<a class="btn btn-outline-success" href="{% url 'home' %}">Powrót do strony głównej</a>                   
+{% endblock %}
+
+
+
+

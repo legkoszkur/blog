@@ -1,0 +1,252 @@
+
+{% extends 'base.html' %}
+{% block title %} Panel administracyjny {% endblock %}
+{% block content %}
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div>
+            <div class="p-3 mb-2 bg-info text-white"><h2 class="page-title text-center">Panel administracyjny</h2></div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- title -->
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Nie opublikowane posty</h4>
+                            
+                        </div>
+                     
+                    </div>
+                    <!-- title -->
+                </div>
+                <div class="table-responsive">
+                    <table class="table v-middle">
+                        <thead>
+                            <tr class="bg-light">
+                                <th class="border-top-0">Tytuł</th>
+                                <th class="border-top-0">Autor</th>
+                                <th class="border-top-0">Data </th>
+   
+                            </tr>
+                        </thead>
+                        {% for post in unpublished_posts %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        
+                                        <a href="{% url 'article-view' post.text_to_url %}" class="stretched-link"><h4 class="m-b-0 font-4">{{post.title}}</h4></a>
+                                    </div>
+                                </td>  
+                                <td>{{post.author}}</td>
+                                <td>{{post.post_date}}</td>
+                                
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- title -->
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Zgłoszenia naruszeń</h4>
+                            
+                        </div>
+                     
+                    </div>
+                    <!-- title -->
+                </div>
+                <div class="table-responsive">
+                    <table class="table v-middle">
+                        <thead>
+                            <tr class="bg-light">
+                                <th class="border-top-0">Zgłoszony</th>
+                                <th class="border-top-0">Zgłaszający</th>
+                                <th class="border-top-0">Data utworzenia komentarza</th>
+                                <th class="border-top-0">Treść zgłoszenia</th>
+                                <th class="border-top-0">Treść komentarza</th>
+                            
+                            </tr>
+                        </thead>
+
+
+
+                        {% for report in comment_reports %}
+                        <tbody>
+                            <tr>
+                                <td>{{report.reported_comment.user.nickname}}</td>
+                                <td>{{report.who_report.nickname}}</td>
+                                <td>{{report.reported_comment.date}}</td>
+
+                                
+                                <td>{{report.report_body}}
+                                <a class="dropdown-item bg-warning" href="{% url 'delete-report' pk=report.pk %}">Usuń zgłoszenie</a>
+                                </td>
+
+                                <td>{{report.reported_comment.body}}
+                                <a class="dropdown-item bg-warning" href="{% url 'delete-comment' report.reported_comment.slug %}">Usuń komentarz</a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        {% endfor %}
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- title -->
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Użytkownicy</h4>
+                            
+                        </div>
+                     
+                    </div>
+                    <!-- title -->
+                </div>
+                <div class="table-responsive">
+                    <table class="table v-middle">
+                        <thead>
+                            <tr class="bg-light">
+                                <th class="border-top-0">Products</th>
+                                <th class="border-top-0">License</th>
+                                <th class="border-top-0">Support Agent</th>
+                                <th class="border-top-0">Technology</th>
+                                <th class="border-top-0">Tickets</th>
+                                <th class="border-top-0">Sales</th>
+                                <th class="border-top-0">Earnings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="m-r-10"><a class="btn btn-circle btn-info text-white">EA</a></div>
+                                        <div class="">
+                                            <h4 class="m-b-0 font-16">Elite Admin</h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Single Use</td>
+                                <td>John Doe</td>
+                                <td>
+                                    <label class="label label-danger">Angular</label>
+                                </td>
+                                <td>46</td>
+                                <td>356</td>
+                                <td>
+                                    <h5 class="m-b-0">$2850.06</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="m-r-10"><a class="btn btn-circle btn-warning text-white">MA</a></div>
+                                        <div class="">
+                                            <h4 class="m-b-0 font-16">Monster Admin</h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Single Use</td>
+                                <td>Venessa Fern</td>
+                                <td>
+                                    <label class="label label-info">Vue Js</label>
+                                </td>
+                                <td>46</td>
+                                <td>356</td>
+                                <td>
+                                    <h5 class="m-b-0">$2850.06</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="m-r-10"><a class="btn btn-circle btn-success text-white">MP</a></div>
+                                        <div class="">
+                                            <h4 class="m-b-0 font-16">Material Pro Admin</h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Single Use</td>
+                                <td>John Doe</td>
+                                <td>
+                                    <label class="label label-success">Bootstrap</label>
+                                </td>
+                                <td>46</td>
+                                <td>356</td>
+                                <td>
+                                    <h5 class="m-b-0">$2850.06</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="m-r-10"><a class="btn btn-circle btn-primary text-white">AA</a></div>
+                                        <div class="">
+                                            <h4 class="m-b-0 font-16">Ample Admin</h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Single Use</td>
+                                <td>John Doe</td>
+                                <td>
+                                    <label class="label label-purple">React</label>
+                                </td>
+                                <td>46</td>
+                                <td>356</td>
+                                <td>
+                                    <h5 class="m-b-0">$2850.06</h5>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</div>
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+

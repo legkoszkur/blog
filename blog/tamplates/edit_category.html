@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Edytuj categorię {% endblock %}
+{% block content %}
+    <div>
+        {% if user.is_superuser %}
+            <div>
+                <h1>Edytuj categorię:</h1>
+                </br>
+                    <div class="form-group" >  
+                        <table>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form.as_table}}
+                        </table>
+                        </br>
+                        <button class="btn btn-dark">Zapisz</button>
+                        </form>
+                 
+                    </div>
+            </div>        
+            </br></br></br></br></br></br></br></br>
+        {% else %}
+            <div>
+                <h1>Ups nie ma takiej strony :/</h1>
+            </div>
+        {% endif%}
+    </div>
+{% endblock %}
+                

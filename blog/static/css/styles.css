@@ -1,0 +1,23 @@
+
+#login-buttons{
+    margin-left: 3px;
+}
+
+
+/*Bootstrap modifications*/
+
+
+.me-2{
+    margin-left: 10px;
+}
+
+#exampleFormControlTextarea1 {
+    max-height: 10cm; 
+    resize: none;
+}
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+{% block title %} Wysłałes newslatter! {% endblock %}
+{% block content %}
+    {% if is_test %}
+        <div class="alert alert-success" role="alert">
+            <p>Wysłałeś wiadomość testową tylko do siebie !</p>
+        </div>
+        </br>
+        <a class="btn btn-outline-success" href="{% url 'home' %}">Powrót do strony głównej</a>
+        
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            <p>Wysłałeś newsletter do wszystkich subskrybentów !</p>
+        </div>
+        </br>
+        <a class="btn btn-outline-success" href="{% url 'home' %}">Powrót do strony głównej</a> 
+
+    {% endif %}               
+{% endblock %}
+    

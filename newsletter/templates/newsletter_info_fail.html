@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Porażka {% endblock %}
+
+{% block content %}                             
+<div class="alert alert-danger" role="alert">
+  <p>Twój adress email jest już w bazie.</p>
+</div>
+</br>
+<a class="btn btn-outline-success" href="{% url 'home' %}">Powrót do strony głównej</a>                   
+{% endblock %}
+
+
+
+

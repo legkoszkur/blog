@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}  
+{% block title %} {{ inputcat_as_title }} {% endblock %}
+{% block content %}
+    <div>
+        {% if posts %}
+            <div>
+                <div>
+                    <h1>{{ inputcat_as_title }}</h1>
+                    <hr class="my-4">
+                </div>
+                <div>
+
+                {% for post in posts %}
+                    <div class="d-flex position-relative">
+                        <div>
+                            {% if post.header_image %}
+                                <img src="{{ post.header_image.url }}" class="flex-shrink-0 me-3" style="height: 170px; width: 170px" alt="[photo]">
+                            {% else %}
+                                <img src="{% static 'images/default_miniature.jpg' %}" class="flex-shrink-0 me-3"  style="height: 170px; width: 170px" alt="[photo1]">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <a style="text-decoration:none" href= "{% url 'article-view' post.text_to_url %}" class="stretched-link text-secondary"></a>
+                            <h5 class="mt-0">{{post.title}}</h5>
+                            <p>{{ post.snippet|safe }}</p>
+                            
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <small>Autor: {{post.author.nickname}} 
+                            | Kategoria:  <a class="text-muted" style="text-decoration:none" href="{% url 'category' post.category|slugify %}" >{{ post.category }}</a>
+                            {% if user == post.author %}
+                                | <a href="{% url 'edit-post' post.slug %}">Edytuj</a>
+                                | <a href="{% url 'delete-post' post.slug %}">(Usuń)</a>
+                            {% endif %}
+                        </small>
+                    </div>
+                    <hr class="my-4">
+                {% endfor %}
+
+                </div>
+            </div>
+        {% else %}
+            <div>
+                <h1>Kategoria "{{ inputcat_as_title }}" nie posiada jeszcze żadnych postów.</h1>
+            </div>    
+        {% endif %}
+    </div>
+                             
+{% endblock %}
+
+{% block pagination %}
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
+      <li class="page-item">
+        {% if posts.has_previous %}
+        <!-- Tutaj innowatorsko zastosowałem request path z internetu zeby pozyskac bierzacą scierzkę nie dałem slesja
+        ponieważ jest on już adresie i wytedy się dublował -->
+            <a class="page-link" href="{{request.path}}?page={{ posts.previous_page_number }}">Poprzednia</a>
+        {% else %}
+            <a class="page-link" href="">Poprzednia</a>
+        {% endif %}
+      </li>
+
+      <li class="page-item disabled"><a class="page-link" href="#">Strona {{ posts.number }}</a></li>
+      
+      <li class="page-item">
+        {% if posts.has_next %}
+            <a class="page-link" href="{{request.path}}?page={{ posts.next_page_number }}">Następna</a>
+        {% else %}
+            <a class="page-link" href="">Następna</a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>                           
+{% endblock pagination %}
+
+

@@ -1,0 +1,141 @@
+
+{% extends 'base.html' %}
+{% block title %} Edycja Profilu {% endblock %}
+
+{% block content %}
+
+
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="container">
+<div class="row flex-lg-nowrap">
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                        <img src="{{ user.profile_picture.url }}" alt="Admin" class="p-2" width="150">
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-left text-sm-left mb-2 mb-sm-0">
+
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user.nickname}}</h4>
+                    <div class="mt-2">
+                        {{form.profile_picture}} 
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <div class="text-muted"><small>Dołączył: {{user.date_joined.date}}</small></div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="active nav-link">Personalne</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form class="form" novalidate="">
+                    <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label>Czym się zjamuję.</label>
+                            <small>(max 30 znaków)</small>
+                            {{form.job}}
+                          </div>
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Moja strona</label>
+                              <small>(max 250 znaków)</small>
+                              {{ form.own_website_url}}
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Linked In</label>
+                              <small>(max 250 znaków)</small>
+                              {{ form.linkedin_url }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Facebook</label>
+                                <small>(max 250 znaków)</small>
+                                {{ form.facebook_url }}
+                            </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Github</label>
+                                <small>(max 250 znaków)</small>
+                                {{ form.github_url }}
+                            </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col mb-3">
+                              <div class="form-group">
+                                <label>Biogram</label>
+                                <small>(max 1000 znaków)</small>
+                                {{form.biogram}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                   
+                   
+                
+                   <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary">Zapisz zmiany</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+{% endblock content %}
+
+{% block aside %}
+<div class="list-group">
+    <button disabled class="list-group-item list-group-item-action bg-dark text-white">Ustawienia zawansowane</button>
+    <a class="list-group-item list-group-item-action" href="{% url 'change-email' %}">Zmień email</a>
+    <a class="list-group-item list-group-item-action" href="{% url 'change-nickname' %}">Zmień nick</a>
+    <a class="list-group-item list-group-item-action" href="{% url 'change-password' %}">Zmień hasło</a>
+    <a class="list-group-item list-group-item-action bg-warning" href="{% url 'delete-account' %}">Usuń konto</a>
+</div>
+</br>
+{% endblock aside %}
+  
+  
+                

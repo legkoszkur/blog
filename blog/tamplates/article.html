@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{object.title}}{% endblock %}
+{% block content %}
+<!-- post to jest forma przesyłania a nie nazwa czy odnoścnik-->
+    <div>
+      <div>
+        <h1>{{object.title}}</h1>
+        <small>Autor: {{object.author.nickname}} 
+        | {{object.post_date}}</small>
+      </div>
+      <div>
+        {% if user == object.author %}
+          | <a href="{% url 'edit-post' object.slug %}">Edit</a>
+          | <a href="{% url 'delete-post' object.slug %}">(Delete)</a>
+        {% endif %}
+        </br></br></br>
+      </div>
+      <div>
+        <img src='{{object.header_image.url}}' alt="Header image" class="img-fluid">
+      </div>
+      <div>
+        <p>{{object.body|safe}}</p>
+        </br></br>
+      </div>
+  </div>
+  <div>
+    {% include 'comments_on_article.html' %}
+  </div>
+{% endblock content%}
+                          

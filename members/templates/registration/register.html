@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+<h1>Register</h1>
+
+
+<form method="POST">
+    {% csrf_token %}
+<!-- mogę tutaj zrobić as_table/p/ po prostu paragraf albo tabela albo ul (rodzaj formatowania textu)-->
+    {{ form.as_p}}
+    <button class="btn btn-dark">Register</button>
+
+
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
+                

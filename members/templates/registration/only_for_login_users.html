@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% block title %} Tylko dla zalogowanych {% endblock %}
+
+{% block content %}
+
+<h1>Tylko dla zalogowanych</h1>
+<p>Aby zobaczyć zawartość tej strony musisz być zalogowany. Jeśli nie masz jeszcze konta możesz się zarestrować.</p>
+
+<a class="btn btn-outline-success" href="{% url 'home' %}">Powrót do zmiany hasła</a>
+                    
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
+                

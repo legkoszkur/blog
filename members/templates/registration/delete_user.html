@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} Change nickname {% endblock %}
+
+{% block content %}
+
+<h1>Usuń konto</h1>
+<div class="alert alert-danger" role="alert">
+    Czy na pewno chcesz usunąć konto?
+</div>
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputPassword1">Podaj hasło</label>
+            <input name="password1" type="password" class="form-control" id="Password1" placeholder="hasło">
+        </div>
+    </br>
+        <div class="form-group">
+          <label for="exampleInputPassword2">Potwierdź hasło</label>
+          <input name="password2" type="password" class="form-control" id="Password2" placeholder="hasło">
+        </div>
+    </br>
+    {% if error %}
+        <p class="text-danger">{{error}}</p>
+    {% endif %}  
+    <button class="btn btn-danger">Usuń</button>
+    
+
+
+
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

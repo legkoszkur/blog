@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Kategorie {% endblock %}
+{% block content %}
+    <div>
+        <h1>Istniejące kategorie</h1>
+        </br>
+    
+        {% for category in existing_categories_for_other_views %}
+        <div class="row">
+        
+            <div class="col-sm-12 text-center card-header">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">{{ category }}</h5>
+                  <a href="{% url 'category' category %}" class="btn btn-primary">Zobacz więcej</a>
+                  {% if user.is_superuser %}
+                  <div>
+                    <a class="dropdown-item bg-success text-white m-1" href="{% url 'edit-category' category.slug %}">Edytuj kategorię</a>
+                    <a class="dropdown-item bg-warning text-white m-1" href="{% url 'delete-category' category.slug %}">Usuń kategorię</a>
+                  </div>
+
+                  {% endif %}
+                </div>
+              </div>
+            </div> 
+        </div>  
+    </br>    
+        {% endfor %}
+
+    </div>
+{% endblock %}

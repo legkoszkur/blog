@@ -1,0 +1,16 @@
+{% if top_list %}
+    <div class="mt-2 d-grid gap-2">
+        <a href="{% url 'top_list' %}" class="text-decoration-none"><h3 class="text-dark">Top tygodnia</h3></a>
+    </div>
+   
+    {% for article in top_list %}
+        {% if article.article__published %}
+
+        <div class="list-group mb-3">
+            <a href="{% url 'article-view' article.article__text_to_url %}" class="list-group-item list-group-item-action">{{article.article__title}}</a>
+        </div> 
+        {% endif %}
+    {% endfor %}
+    <hr class="my-4">
+{% endif%}
+

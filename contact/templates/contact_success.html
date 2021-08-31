@@ -1,0 +1,12 @@
+
+{% extends 'base.html' %}
+{% block title %} Sukces ! {% endblock %}
+
+{% block content %}
+<div class="alert alert-success" role="alert">
+    <p>Wiadomość została wysłana !</p>
+</div>
+</br>
+<a class="btn btn-outline-success" href="{% url 'home' %}">Powrót do strony głównej</a>                  
+{% endblock %}
+    
